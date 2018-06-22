@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  app:
+    image: webdevops/php-nginx:7.2
+    links:
+      - redis
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app/
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public/
+      - redis_dsn=$redis_dsn
+      - cache_ttl=$cache_ttl
+      - gmaps_backend_api_key=$gmaps_backend_api_key
+      - gmaps_frontend_api_key=$gmaps_frontend_api_key
+
+  redis:
+    image: redis:4-alpine
+    volumes:
+      - ./redis:/data

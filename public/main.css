@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#progress-control {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #EEE;
+}
+
+#progress-bar {
+    height: 100%;
+    background: #47abff;
+    width: 0;
+}
+
+#map {
+    height: 100%;
+}
+
+#search-control {
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 4px -1px;
+    width: 25px;
+    height: 25px;
+    margin: 12px 14px;
+    overflow: hidden;
+    background: #FFF url('https://libs.cdnjs.net/material-design-icons/3.0.1/action/1x_web/ic_search_black_18dp.png') no-repeat center right 4px;
+    cursor: pointer;
+}
+
+#search-control.open {
+    width: 60%;
+    max-width: 400px;
+}
+
+#search-control input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 28px 0 8px;
+    background: none;
+    border: none;
+    display: none;
+}
+
+#search-control.open input {
+    display: block;
+}
+
+.iw-title {
+    font-size: 1.5em;
+    display: block;
+    margin: 6px 0 12px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.iw-subtitle {
+    overflow: hidden;
+}
+
+.iw-date {
+    float: left;
+}
+
+.iw-tags {
+    float: right;
+}
+
+.iw-tag {
+    background: aliceblue;
+    padding: 3px 6px;
+    margin-left: 6px;
+}
+
+.iw-tag.money {
+    background: #CFC;
+}
+
+.iw-content {
+    font-size: 1em;
+    margin-top: 8px;
+    max-height: 200px;
+    overflow-y: scroll;
+}

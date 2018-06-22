@@ -1,0 +1,30 @@
+{
+  "name": "uuf6429/so-job-map",
+  "type": "project",
+  "description": "StackOverflow Job Map View",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Christian Sciberras",
+      "homepage": "http://christian.sciberras.me"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "symfony/http-foundation": "^3",
+    "predis/predis": "^1.1",
+    "geocoder-php/google-maps-provider": "^4.2",
+    "php-http/guzzle6-adapter": "^1.1",
+    "php-http/message": "^1.6",
+    "php-http/cache-plugin": "^1.5",
+    "cache/predis-adapter": "^1.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "uuf6429\\SOJobMap\\": "src"
+    }
+  }
+}
