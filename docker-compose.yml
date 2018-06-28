@@ -6,8 +6,6 @@ services:
     image: webdevops/php-nginx:7.2
     links:
       - redis
-    ports:
-      - "80:80"
     volumes:
       - .:/app/
     environment:
