@@ -3,11 +3,7 @@
 if (!function_exists('getEnvVar')) {
     function getEnvVar(string $name, $default)
     {
-        if (!\in_array($value = getenv($name), [false, null], true)) {
-            return $value;
-        }
-
-        return $default;
+        return \in_array($value = getenv($name), [false, null], true) ? $default : $value;
     }
 }
 
