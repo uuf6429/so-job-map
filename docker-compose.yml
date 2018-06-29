@@ -3,13 +3,11 @@ version: '2'
 services:
 
   app:
-    image: webdevops/php-nginx:7.2
+    build:
+      context: .
     links:
       - redis
-    volumes:
-      - .:/app/
     environment:
-      - WEB_DOCUMENT_ROOT=/app/public/
       - redis_dsn=$redis_dsn
       - cache_ttl=$cache_ttl
       - gmaps_backend_api_key=$gmaps_backend_api_key
