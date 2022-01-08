@@ -17,7 +17,7 @@ class MainView
     {
         echo <<<HTML
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>{$this->pageTitleText}</title>
         <meta name="viewport" content="initial-scale=1.0">

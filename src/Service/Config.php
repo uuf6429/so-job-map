@@ -2,7 +2,10 @@
 
 namespace uuf6429\SOJobMap\Service;
 
-class Config implements \ArrayAccess
+use ArrayAccess;
+use RuntimeException;
+
+class Config implements ArrayAccess
 {
     /**
      * @var array
@@ -11,9 +14,9 @@ class Config implements \ArrayAccess
 
     public function __construct()
     {
-        $this->data = file_exists(__DIR__ . '/../../config.php')
-            ? include __DIR__ . '/../../config.php'
-            : include __DIR__ . '/../../config.dist.php';
+        $this->data = file_exists(__DIR__ . '../../config.php')
+            ? include __DIR__ . '../../config.php'
+            : include __DIR__ . '../../config.dist.php';
     }
 
     /**
@@ -37,9 +40,9 @@ class Config implements \ArrayAccess
     /**
      * @inheritdoc
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
-        throw new \RuntimeException('Method ' . __FUNCTION__ . ' not implemented.');
+        throw new RuntimeException('Method ' . __FUNCTION__ . ' not implemented.');
     }
 
     /**
@@ -47,7 +50,7 @@ class Config implements \ArrayAccess
      */
     public function offsetSet($offset, $value): void
     {
-        throw new \RuntimeException('Method ' . __FUNCTION__ . ' not implemented.');
+        throw new RuntimeException('Method ' . __FUNCTION__ . ' not implemented.');
     }
 
     /**
@@ -55,6 +58,6 @@ class Config implements \ArrayAccess
      */
     public function offsetUnset($offset): void
     {
-        throw new \RuntimeException('Method ' . __FUNCTION__ . ' not implemented.');
+        throw new RuntimeException('Method ' . __FUNCTION__ . ' not implemented.');
     }
 }

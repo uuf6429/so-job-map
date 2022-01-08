@@ -2,12 +2,15 @@
 
 namespace uuf6429\SOJobMap\Service;
 
-use Psr\SimpleCache\CacheInterface;
-use uuf6429\SOJobMap\Model\JobItem;
-use Geocoder\Query\GeocodeQuery;
-use Geocoder\Provider\Provider as Geocoder;
+use DOMDocument;
+use ErrorException;
 use Geocoder\Exception\Exception as GeocodeException;
+use Geocoder\Provider\Provider as Geocoder;
+use Geocoder\Query\GeocodeQuery;
 use Psr\SimpleCache\CacheException;
+use Psr\SimpleCache\CacheInterface;
+use SimpleXMLElement;
+use uuf6429\SOJobMap\Model\JobItem;
 
 class FeedReader
 {
@@ -47,7 +50,7 @@ class FeedReader
         $feed = simplexml_load_string(file_get_contents($feedUrl));
 
         return array_map(
-            function (\SimpleXMLElement $item) {
+            function (SimpleXMLElement $item) {
                 $guid = (string)$item->guid;
                 $link = (string)$item->link;
                 $categories = (array)$item->category;
@@ -181,11 +184,11 @@ class FeedReader
                 return $salary;
             }
 
-            $doc = new \DOMDocument();
+            $doc = new DOMDocument();
             @$doc->loadHTMLFile($link);
             if (!($page = simplexml_import_dom($doc))) {
                 $error = libxml_get_last_error();
-                throw new \ErrorException($error->message, $error->code, $error->level, $error->file, $error->line);
+                throw new ErrorException($error->message, $error->code, $error->level, $error->file, $error->line);
             }
 
             $salary = trim((string)$page->xpath('//div[@id="content"]//header//span[@class="-salary pr16"]')[0]);
@@ -193,10 +196,7 @@ class FeedReader
             $this->cache->set($key, $salary);
 
             return $salary;
-        } catch (\ErrorException $exception) {
-            error_log($exception);
-            return '';
-        } catch (CacheException $exception) {
+        } catch (ErrorException|CacheException $exception) {
             error_log($exception);
             return '';
         } finally {

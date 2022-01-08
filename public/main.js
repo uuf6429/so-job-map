@@ -30,7 +30,7 @@ const markers = [],
 
 window['initMap'] = function () {
     map = new google.maps.Map(mapDiv, {
-        center: {lat: 29, lng: 0},
+        center: { lat: 29, lng: 0 },
         zoom: 3
     });
     infoWindow = new google.maps.InfoWindow();
@@ -42,7 +42,7 @@ window['initMap'] = function () {
     searchDiv.onclick = function () {
         searchDiv.className = 'open';
     };
-    searchInput.onkeyup = function(){
+    searchInput.onkeyup = function () {
         if (event.keyCode === 13) {
             initQuery(searchInput.value);
         }
@@ -141,14 +141,14 @@ function initMarker(jobItem) {
     marker.addListener('click', function () {
         infoWindow.setContent([
             '<div class="iw-title">',
-                '<a target="_blank" href="' + jobItem.link + '">' + jobItem.title + '</a>',
-                ' at ',
-                '<a target="_blank" href="https://www.google.com/search?q=' + encodeURIComponent(jobItem.company) + '">' + jobItem.company + '</a>',
+            '<a target="_blank" href="' + jobItem.link + '">' + jobItem.title + '</a>',
+            ' at ',
+            '<a target="_blank" href="https://www.google.com/search?q=' + encodeURIComponent(jobItem.company) + '">' + jobItem.company + '</a>',
             '</div>',
             '<div class="iw-subtitle">',
             '  <div class="iw-date">' + jobItem.pubDate + '</div>',
             '  <div class="iw-tags">',
-            '    <span class="iw-tag money">'+(jobItem.salary || '$???')+'</span>',
+            '    <span class="iw-tag money">' + (jobItem.salary || '$???') + '</span>',
             '    <span class="iw-tag">' + jobItem.categories.join('</span><span class="iw-tag">') + '</span>',
             '  </div>',
             '</div>',

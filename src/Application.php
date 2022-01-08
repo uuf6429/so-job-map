@@ -2,11 +2,15 @@
 
 namespace uuf6429\SOJobMap;
 
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Throwable;
+use function count;
+use function get_class;
+use function json_encode;
 
 class Application
 {
@@ -32,7 +36,7 @@ class Application
         $this->mainView = $mainView;
     }
 
-    public function run(Request $request = null)
+    public function run(Request $request = null): void
     {
         try {
             if (!$request) {
@@ -49,10 +53,10 @@ class Application
             }
 
             $response = $this->$actionFn($request);
-        } catch (\Throwable $ex) {
+        } catch (Throwable $ex) {
             error_log($ex);
             $response = new Response(
-                \get_class($ex) . ': ' . $ex->getMessage(),
+                get_class($ex) . ': ' . $ex->getMessage(),
                 $ex->getCode() ?: 500
             );
         }
@@ -79,17 +83,17 @@ class Application
                 ob_implicit_flush(true);
 
                 foreach ($records as $record) {
-                    echo \json_encode($record, JsonResponse::DEFAULT_ENCODING_OPTIONS) . "\n\n";
+                    echo json_encode($record, JsonResponse::DEFAULT_ENCODING_OPTIONS) . "\n\n";
 
                     if (json_last_error() !== JSON_ERROR_NONE) {
-                        throw new \InvalidArgumentException(json_last_error_msg());
+                        throw new InvalidArgumentException(json_last_error_msg());
                     }
                 }
             },
-            StreamedResponse::HTTP_OK,
+            Response::HTTP_OK,
             [
                 'Content-Type' => 'application/json',
-                'X-Total-Count' => \count($records),
+                'X-Total-Count' => count($records),
                 'X-Accel-Buffering' => 'no',
             ]
         );

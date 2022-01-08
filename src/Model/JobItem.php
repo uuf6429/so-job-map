@@ -2,7 +2,10 @@
 
 namespace uuf6429\SOJobMap\Model;
 
-class JobItem implements \JsonSerializable
+use JsonSerializable;
+use function is_array;
+
+class JobItem implements JsonSerializable
 {
     /**
      * @var string
@@ -161,7 +164,7 @@ class JobItem implements \JsonSerializable
      */
     public function setCoords($lat = null, $lng = null): self
     {
-        if (\is_array($lat)) {
+        if (is_array($lat)) {
             [$lat, $lng] = $lat;
         }
 
